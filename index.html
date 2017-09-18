@@ -1,33 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <title>UTC to JSON</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
+</head>
 <style>
-.single{
-  text-indent: 25px;
-}
-.double{
-  text-indent: 50px;
-}
+  .single {
+    text-indent: 25px;
+  }
+
+  .double {
+    text-indent: 50px;
+  }
 </style>
+<body>
+  <h1 class="text-center">UTC to JSON</h1>
+  <p class="text-center">Displaying UTC and Local time zones as a JSON string</p>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <div class="well">
+        <p>{ <br> &nbsp;&nbsp;&nbsp;&nbsp;date" : <span id="date"></span>, <br> &nbsp;&nbsp;&nbsp;&nbsp;"time" : { <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hours" : <span id="hours"></span>, <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"minutes"
+          : <span id="minutes"></span>, <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"seconds" : <span id="seconds"></span>.<span id="milliseconds"></span> <br> &nbsp;&nbsp;&nbsp;&nbsp;} <br> }
+        </p>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-success pull-left" onclick="getUTC()">UTC</a>
+        <a class="btn btn-info pull-left" onclick="getLocalTime()" style="margin:0 10px">Local</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    const d = new Date();
 
+    let getUTC = () => {
+      document.getElementById('date').innerHTML = d.toJSON().slice(0, 10);
+      document.getElementById('hours').innerHTML = d.getUTCHours();
+      document.getElementById('minutes').innerHTML = d.getUTCMinutes();
+      document.getElementById('seconds').innerHTML = d.getUTCSeconds();
+      document.getElementById('milliseconds').innerHTML = d.getUTCMilliseconds();
+    }
 
-<p>{ </p>
-<p class="single">  "date" : <span id="date"></span>, </p>
-<p class="single">  "time" : { </p>
-<p class="double">    "hours" : <span id="hours"></span>, </p>
-<p class="double">    "minutes" : <span id="minutes"></span>, </p>
-<p class="double">    "seconds" : <span id="seconds"></span>.<span id="milliseconds"></span> </p>
-<p class="single">  }
-<p> }</p>
+    let getLocalTime = () => {
+      let month = ('0' + (d.getMonth() + 1)).toString().slice(-2);
+      let date = ('0' + d.getDate().toString()).slice(-2);
+      document.getElementById('date').innerHTML = d.getFullYear().toString() + '-' + month + '-' + date;
+      document.getElementById('hours').innerHTML = d.getHours();
+      document.getElementById('minutes').innerHTML = d.getMinutes();
+      document.getElementById('seconds').innerHTML = d.getSeconds();
+      document.getElementById('milliseconds').innerHTML = d.getMilliseconds();
+    }
 
-
-
-<script>
-  const d = new Date();
-
-    document.getElementById('date').innerHTML = d.toJSON().slice(0,10);
-    document.getElementById('hours').innerHTML = d.getUTCHours();
-    document.getElementById('minutes').innerHTML = d.getUTCMinutes();
-    document.getElementById('seconds').innerHTML = d.getUTCSeconds();
-    document.getElementById('milliseconds').innerHTML = d.getUTCMilliseconds();
-
-    var n = d.getDay()
-    console.log(d.toJSON());
-</script>
+    getUTC();
+    console.log(d.toJSON()); //to check UTC
+  </script>
+</body>
+</html>
