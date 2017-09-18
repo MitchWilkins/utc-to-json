@@ -1,0 +1,33 @@
+<style>
+.single{
+  text-indent: 25px;
+}
+.double{
+  text-indent: 50px;
+}
+</style>
+
+
+<p>{ </p>
+<p class="single">  "date" : <span id="date"></span>, </p>
+<p class="single">  "time" : { </p>
+<p class="double">    "hours" : <span id="hours"></span>, </p>
+<p class="double">    "minutes" : <span id="minutes"></span>, </p>
+<p class="double">    "seconds" : <span id="seconds"></span>.<span id="milliseconds"></span> </p>
+<p class="single">  }
+<p> }</p>
+
+
+
+<script>
+  const d = new Date();
+
+    document.getElementById('date').innerHTML = d.toJSON().slice(0,10);
+    document.getElementById('hours').innerHTML = d.getUTCHours();
+    document.getElementById('minutes').innerHTML = d.getUTCMinutes();
+    document.getElementById('seconds').innerHTML = d.getUTCSeconds();
+    document.getElementById('milliseconds').innerHTML = d.getUTCMilliseconds();
+
+    var n = d.getDay()
+    console.log(d.toJSON());
+</script>
